@@ -1,0 +1,103 @@
+<!--
+  Generated template for the EventBebidasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Escoger Bebida</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+  <ion-datetime displayFormat="MMM DD, h:mm A" [(ngModel)]="myDate"></ion-datetime>
+
+<ion-content padding>
+
+  <ion-item padding *ngIf = "estado1 != 0">
+    <ion-label>Nombre:</ion-label>
+    <ion-input type="text" [(ngModel)] = "nombreUsuario" ></ion-input>
+  </ion-item>
+
+  <ion-item padding *ngIf = "estado1 != 0">
+      <ion-label>Cuantas Bebidas?</ion-label>
+      <ion-input type="number"[(ngModel)] = "cantidadOrden" ></ion-input>
+  </ion-item>
+
+
+    <button *ngIf = "estado0 != 0" padding ion-button block color="primary" round (click)="continuar()">
+        Continuar
+    </button>
+
+
+  <ion-item  *ngIf = "estado != 0" (click)="goToMartini()" >
+    <ion-thumbnail item-start>
+      <img src="assets/imgs/thumbnail-martini.png">
+    </ion-thumbnail>
+    <h1>Martini</h1>
+  </ion-item>
+
+  <ion-item *ngIf = "estado != 0" (click)="goToLagunaAzul()">
+    <ion-thumbnail item-start >
+      <img src="assets/imgs/thumbnail-LagunaAzul.png">
+    </ion-thumbnail>
+    <h1>Laguna Azul</h1>
+  </ion-item>
+
+  <ion-item *ngIf = "estado != 0" (click)="goToHastaNunca()">
+    <ion-thumbnail item-start >
+      <img src="assets/imgs/thumbnail-hastanunca.png">
+    </ion-thumbnail>
+    <h1>Hasta Nunca</h1>
+    
+  </ion-item>
+
+  <ion-item *ngIf = "estado != 0" (click)="goToCaipirina()" >
+    <ion-thumbnail item-start>
+      <img src="assets/imgs/thumbnail-caipirina.png">
+    </ion-thumbnail>
+    <h1>Caipiriña</h1>
+    
+  </ion-item>
+
+  <ion-card *ngIf = "estadoOrden != 0" >
+    <ion-item >
+      <h1>Orden</h1>
+    </ion-item>
+    <ion-item >
+        Nombre: {{nombreUsuario}} 
+    </ion-item>
+    <ion-item *ngIf = "tapMartini != 0">
+      Martini: {{tapMartini}} 
+    </ion-item>
+    <ion-item *ngIf = "tapLaguna != 0">
+      Laguna: {{tapLaguna}} 
+    </ion-item>
+    <ion-item *ngIf = "tapHastaNunca != 0">
+      Hasta Nunca: {{tapHastaNunca}} 
+    </ion-item>
+    <ion-item *ngIf = "tapCaipirina != 0">
+        Caipiriña: {{tapCaipirina}} 
+    </ion-item>
+    <ion-item >
+        Cantidad Total: {{cantidadOrden}} 
+    </ion-item>
+
+  </ion-card>
+
+  <p padding class="centrado" *ngIf = "estado2 != 0" >
+  <button ion-button color="light" icon-start (click) = "functionReiniciar()">
+    <ion-icon name='arrow-back'></ion-icon>
+    Repetir Orden
+  </button>
+
+  <button ion-button color="light" icon-end (click) = "pedirOrden()">
+    Guardar
+    <ion-icon name='arrow-forward'></ion-icon>
+  </button>
+  </p>
+
+</ion-content>

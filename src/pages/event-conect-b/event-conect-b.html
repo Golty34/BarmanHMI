@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Bluetooth Serial Interface
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button full class="submit-button" (click)="listPairedDevices()" color="danger">
+    <ion-icon name="refresh"></ion-icon>&nbsp;Buscar nuevos dispositivos Bluetooth</button>
+  <ion-row>
+    <ion-col>
+      <ion-list radio-group [(ngModel)]="pairedDeviceID" *ngIf="listToggle">
+        <ion-item *ngFor="let i of pairedList;let j=index">
+          <ion-label>{{i.name}}</ion-label>
+          <ion-radio value="{{j}}" ></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <button ion-button full class="submit-button" *ngIf="listToggle" (click)="selectDevice()" color="danger">
+    <ion-icon name="bluetooth"></ion-icon>&nbsp;Conectar Bluetooth
+  </button>
+  
+</ion-content>

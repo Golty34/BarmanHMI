@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>Ingresar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+    <ion-item>
+    <ion-label stacked>Correo Electronico</ion-label>
+    <ion-input formControlName="email" type="email"
+    placeholder="Escribe tu Correo"
+    [class.invalid]="!loginForm.controls.email.valid && blur">
+    </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid &&
+    loginForm.controls.email.touched">
+    <p>Ingresa una Direccion de Correo Valida.</p>
+    </ion-item>
+    <ion-item>
+    <ion-label stacked>Contraseña</ion-label>
+    <ion-input formControlName="password" type="password"
+    placeholder="Escribe tu contraseña"
+    [class.invalid]="!loginForm.controls.password.valid && blur">
+    </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid
+    && loginForm.controls.password.touched">
+    <p>La contraseña debe tener mas de 6 caracteres.</p>
+    </ion-item>
+    <button ion-button block  color="danger" round type="submit" [disabled]="!loginForm.valid">
+    Iniciar Sesion
+    </button>
+    </form>
+    <button ion-button block clear (click)="goToSignup()">
+    Crear Cuenta
+    </button>
+    <button ion-button block clear (click)="goToResetPassword()">
+    Olvide mi Contraseña :(
+    </button>    
+</ion-content>

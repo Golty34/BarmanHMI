@@ -1,33 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, NavPush } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { AlertController, ToastController } from 'ionic-angular';
 
-import { EventInicioPage } from '../event-inicio/event-inicio'
-import { EventBebidasPage } from '../event-bebidas/event-bebidas';
+import { HomePage } from '../home/home';
 
-
+@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-event-conect-b',
+  templateUrl: 'event-conect-b.html',
 })
-export class HomePage {
-  rootPage:any;
+export class EventConectBPage {
+
   pairedList: pairedlist;
   listToggle: boolean = false;
   pairedDeviceID: number = 0;
   dataSend: string = "";
 
-  constructor(
-    public navCtrl: NavController, 
-    private alertCtrl: AlertController, 
-    private bluetoothSerial: BluetoothSerial, 
-    private toastCtrl: ToastController
-  ) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private bluetoothSerial: BluetoothSerial, private toastCtrl: ToastController) 
+  {
+    this.checkBluetoothEnabled();
   }
 
-  
   checkBluetoothEnabled() {
     this.bluetoothSerial.isEnabled().then(success => {
       this.listPairedDevices();
@@ -63,14 +57,8 @@ export class HomePage {
     this.bluetoothSerial.connect(address).subscribe(success => {
       this.deviceConnected();
       this.showToast("Conectado");
-      
-      if (this.bluetoothSerial.isConnected()) {
-        this.navCtrl.push("EventInicioPage");
-      }
-      
     }, error => {
       this.showError("Error conectando Dispositivo Bluetoth");
-      this.navCtrl.push(HomePage);
     });
   }
 
@@ -78,25 +66,17 @@ export class HomePage {
     // Subscribe to data receiving as soon as the delimiter is read
     this.bluetoothSerial.subscribe('\n').subscribe(success => {
       this.handleData(success);
-      //this.showToast("Conectado");
-      
-      //this.navCtrl.setRoot(HomePage);
+      this.showToast("Conectado");
+      this.navCtrl.setRoot(HomePage);
     }, error => {
       this.showError(error);
     });
-
-    
-  }
-
-  deviceDisconnected() {
-    // Unsubscribe from data receiving
-    this.bluetoothSerial.disconnect();
-    this.showToast("Dispositivo desconectado");
   }
 
   handleData(data) {
     this.showToast(data);
   }
+
   showError(error) {
     let alert = this.alertCtrl.create({
       title: 'Error',
