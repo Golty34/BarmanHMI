@@ -37,19 +37,7 @@ export class EventInicioPage {
     this.navCtrl.push("InventarioHomePage")
   }
 
-  recibirDatos(): void{
-    
-    this.bluetoothSerial.available()
-      .then((number: any) => {
-        this.bluetoothSerial.read()
-        .then((data: any) => {
-          this.datoReturn = parseFloat(data);
-          this.bluetoothSerial.clear();
-          this.showToast("Dato Recibido: " + this.datoReturn);
-         
-        });
-      });
-  }
+ 
 
   showToast(msj) {
     const toast = this.toastCtrl.create({

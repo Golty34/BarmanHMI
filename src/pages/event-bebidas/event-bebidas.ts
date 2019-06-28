@@ -280,81 +280,86 @@ export class EventBebidasPage {
     //-------------------------------------------------------------------------//
 
     if (this.countVodka != 0 ) {
-      this.tiempoVodka = 9; //
+      this.tiempoVodka = 3; //
     }else{
       this.tiempoVodka = 0;
     }
     if (this.countRon != 0 ) {
-      this.tiempoRon = 9; //
+      this.tiempoRon = 3; //
     }else{
       this.tiempoRon = 0;
     }
     if (this.countVermouth != 0 ) {
-      this.tiempoVermouth = 9; //
+      this.tiempoVermouth = 3; //
     }else{
       this.tiempoVermouth = 0;
     }
     if (this.countTequila != 0 ) {
-      this.tiempoTequila = 9; //
+      this.tiempoTequila = 3; //
     }else{
       this.tiempoTequila = 0;
     }
     if (this.countcuracao != 0 ) {
-      this.tiempoCuracao = 9; //
+      this.tiempoCuracao = 3; //
     }else{
       this.tiempoCuracao = 0;
     }
     if (this.countGinger != 0 ) {
-      this.tiempoGinger = 9; //
+      this.tiempoGinger = 3; //
     }else{
       this.tiempoGinger = 0;
     }
 
       this.orden.id = Date.now();
       this.orden.nombre = this.nombreUsuario;
+      
+      /*
+      this.datoSerial = "90,0" + this.tiempoVodka + ",0" + this.countVodka+ ",03"
+                        ",57,0" + this.tiempoVermouth + ",0" + this.countVermouth+ ",01"
+                        ",49,0" + this.tiempoRon + ",0" + this.countRon+ ",01"
+                        ",50,0" + this.tiempoTequila + ",0" + this.countTequila+ ",01"
+                        ",49,0" + this.tiempoCuracao + ",0" + this.countcuracao+ ",01"
+                        ",49,0" + this.tiempoGinger + ",0" + this.countGinger+ ",06"
+                        + ",";
+*/
 
-      this.datoSerial = "05,0" + this.tiempoVodka + ",0" + this.countVodka+
-                        ",10,0" + this.tiempoVermouth + ",0" + this.countVermouth+
-                        ",10,0" + this.tiempoRon + ",0" + this.countRon+
-                        ",10,0" + this.tiempoTequila + ",0" + this.countTequila+
-                        ",10,0" + this.tiempoCuracao + ",0" + this.countcuracao+
-                        ",05,0" + this.tiempoGinger + ",0" + this.countGinger+ 
-                        ",15,50,0" + this.cantidadOrden + ",";
-
+    this.datoSerial = "00,03,0" + this.countVodka +
+                     ",01,01,0" + this.countVermouth +
+                     ",00,01,0" + this.countRon +
+                     ",00,01,0" + this.countTequila +
+                     ",00,01,0" + this.countcuracao +
+                     ",00,06,0" + this.countGinger   +
+                     ",00,00,0" + this.cantidadOrden +",";
+                     
       console.log("DatoSerial = "+this.datoSerial);
       console.log("datoVodka =" +this.countVodka);
       /*
       this.bluetoothSerial.write('Preparando El siguiente Pedido de: ' + this.orden.nombre).then();
       this.bluetoothSerial.write('\n').then();
-
       if (this.tapMartini > 0) {
         this.bluetoothSerial.write("Martini: "+ this.tapMartini );
         this.bluetoothSerial.write('\n').then();
       } else {
         this.orden.martini = null;
       }
-
       if (this.tapLaguna > 0) {
         this.bluetoothSerial.write("Laguna Azul: "+ this.tapLaguna );
         this.bluetoothSerial.write('\n').then();
       } else {
         this.orden.lagunaAzul = null;
       }
-
       if (this.tapHastaNunca  > 0) {
         this.bluetoothSerial.write("Hasta Nunca: "+ this.tapHastaNunca  );
         this.bluetoothSerial.write('\n').then();
       } else {
         this.orden.hastaNunca = null;
       }
-
       if (this.tapCaipirina > 0) {
         this.bluetoothSerial.write("Caipirina: "+ this.tapCaipirina );
         this.bluetoothSerial.write('\n').then();
       } else {
         this.orden.caipirina = null;
       }
-
     */
 
    this.bluetoothSerial.write(this.datoSerial).then();
@@ -362,6 +367,7 @@ export class EventBebidasPage {
     this.notesService.escribirOrden().child(this.orden.id).set(this.orden);
 
    
+    this.functionReiniciar();
 
     this.navCtrl.pop();
 
